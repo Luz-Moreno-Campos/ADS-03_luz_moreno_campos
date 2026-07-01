@@ -53,7 +53,56 @@ namespace ADS_03_luz_moreno_campos
             return DecodeLetter(mappedChar, level - 1);
         }
 
-     
+
+        private static string DecodeName(string encodedName)
+        {
+            if (encodedName == null)
+            {
+                throw new ArgumentNullException(
+                    paramName: null,
+                    message: "Encoded name cannot be null");
+            }
+
+            string decodedName = "";
+
+            for (int i = 0; i < encodedName.Length; i += 2)
+            {
+                if (i + 1 >= encodedName.Length)
+                {
+                    throw new FormatException(
+                        "Invalid format. Each letter must be followed by a level digit.");
+                }
+                char letter = encodedName[i];
+                char level = encodedName[i + 1];
+
+                
+                if (letter < 'A' || letter > 'Z')
+                {
+                    throw new ArgumentOutOfRangeException(
+                        paramName: null,
+                        message: "Only upper case letters A-Z are allowed");
+                }
+
+
+                int levelToInt = level - '0'; 
+                
+                if (levelToInt < 1 || levelToInt> 9)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        paramName: null,
+                        message: "Level must be a digit between 1 and 9");
+                }
+
+                char decodedChar = DecodeLetter(letter, levelToInt);
+                decodedName += decodedChar;
+            }
+
+            return decodedName;
+        }
+
+
+
+
 
 
 
