@@ -36,6 +36,21 @@ namespace ADS_03_luz_moreno_campos
         }
 
 
+        private static char DecodeLetter(char encodedChar, int level)
+        {
+            if (level == 1)
+            {
+                return ReverseMapping(encodedChar);
+            }
+
+            int originalIndex = GetOriginalIndex(encodedChar);        
+            char mappedChar = Mapped[originalIndex];
+
+            return DecodeLetter(mappedChar, level - 1);
+        }
+
+
+
 
 
 
