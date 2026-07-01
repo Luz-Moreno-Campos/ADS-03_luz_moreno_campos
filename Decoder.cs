@@ -62,6 +62,12 @@ namespace ADS_03_luz_moreno_campos
                     paramName: null,
                     message: "Encoded name cannot be null");
             }
+            else if (encodedName == "")
+            {
+                throw new ArgumentException(
+                   paramName: null,
+                   message: "Encoded name cannot be empty");
+            }
 
             string decodedName = "";
 
@@ -99,20 +105,6 @@ namespace ADS_03_luz_moreno_campos
 
             return decodedName;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }
