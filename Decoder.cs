@@ -25,7 +25,11 @@ namespace ADS_03_luz_moreno_campos
                     return i;
                 }
             }
-            return -1;
+
+            throw new ArgumentOutOfRangeException(
+            paramName: null,
+            message: "Only upper case letters are allowed.");
+
         }
 
         private static char ReverseMapping(char baseChar)
@@ -48,6 +52,9 @@ namespace ADS_03_luz_moreno_campos
 
             return DecodeLetter(mappedChar, level - 1);
         }
+
+     
+
 
 
 
