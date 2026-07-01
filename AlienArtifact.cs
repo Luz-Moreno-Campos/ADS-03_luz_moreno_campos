@@ -5,7 +5,7 @@ namespace ADS_03_luz_moreno_campos
     public class AlienArtifact
     {
         //Wrote it in camelCase because it is a private const, which I will use to validate description in description setter.
-        private const int maxDescriptionLength = 500;
+        private const int maxDescriptionLength = 200;
 
         public string EncodedName { get; private set; }
         public string DecodedName { get; private set; }
@@ -25,11 +25,29 @@ namespace ADS_03_luz_moreno_campos
             {
                 if (value.Length > maxDescriptionLength)
                 {
-                    throw new ArgumentOutOfRangeException("Description exceeds maximum length.");
+                    throw new ArgumentOutOfRangeException(
+                             paramName: null,
+                             message: $"Description exceeds maximum length of {maxDescriptionLength} characters.");
                 }
 
                 _description = value;
             }
+        }
+
+        public AlienArtifact(
+          string encodedName,
+          string decodedName,
+          string planet,
+          string discoveryDate,
+          string storageLocation,
+          string description)
+        {
+            EncodedName = encodedName;
+            DecodedName = decodedName;
+            Planet = planet;
+            DiscoveryDate = discoveryDate;
+            StorageLocation = storageLocation;
+            Description = description;
         }
     }
 }
