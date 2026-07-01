@@ -28,7 +28,13 @@ namespace ADS_03_luz_moreno_campos
             return -1;
         }
 
-       
+        private static char ReverseMapping(char baseChar)
+        {
+            int pos = GetOriginalIndex(baseChar);
+            int mirrorPos = 25 - pos; // calculates the "mirror" character in the original alphabet
+            return Original[mirrorPos];
+        }
+
 
 
 
