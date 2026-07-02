@@ -25,5 +25,30 @@ namespace ADS_03_luz_moreno_campos
         }
 
 
+        //Method  for insertion sort
+        public static void ShiftRight(AlienArtifact[] array, int startIndex)
+        {
+            if (array == null)
+            {
+                throw new ArgumentNullException(
+                    paramName: null,
+                    message: "Array cannot be null.");
+            }
+
+            if (startIndex < 0 || startIndex >= array.Length - 1)
+            {
+                throw new ArgumentOutOfRangeException(
+                    paramName: null,
+                    message: "Start index must be within a valid range for shifting.");
+            }
+
+            for (int i = array.Length - 1; i > startIndex; i--)
+            {
+                array[i] = array[i - 1];
+            }
+        }
+
+
+
     }
 }
