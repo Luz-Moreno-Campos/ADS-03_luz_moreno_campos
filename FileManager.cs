@@ -118,7 +118,7 @@ namespace ADS_03_luz_moreno_campos
             _summaryPath = summaryPath;
         }
 
-        public AlienArtifact[] LoadVault(out int count)
+                public AlienArtifact[] LoadVault(out int count)
         {
             count = 0;
             string[] lines;
@@ -186,6 +186,7 @@ namespace ADS_03_luz_moreno_campos
             return artifacts;
 
         }
+
     }
 
 }
