@@ -187,6 +187,48 @@ namespace ADS_03_luz_moreno_campos
 
         }
 
-    }
+        public void SaveSummary(AlienArtifact[] artifacts)
+        {
+            StreamWriter writer = null;
 
+            try
+            {
+                writer = new StreamWriter(_summaryPath);
+
+                for (int i = 0; i < artifacts.Length; i++)
+                {
+                    AlienArtifact artifact = artifacts[i];
+
+                    if (artifact == null)
+                    {
+                        throw new FormatException(
+                            $"Invalid artifact at index {i}: artifact is null.");
+                    }
+
+                    string line =
+                        $"{artifact.EncodedName}|{artifact.Planet}|{artifact.DiscoveryDate}|{artifact.StorageLocation}|{artifact.Description}";
+
+                    writer.WriteLine(line);
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                throw new UnauthorizedAccessException(
+                    "Access denied while writing the summary file.");
+            }
+            catch (IOException)
+            {
+                throw new IOException(
+                    "An I/O error occurred while writing the summary file.");
+            }
+            finally
+            {
+                if (writer != null)
+                {
+                    writer.Close();
+                }
+            }
+        }
+
+    }
 }
