@@ -1,0 +1,22 @@
+[33m616bc04[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32minventory-manager[m[33m)[m reorganized LoadVault method in FileManager into 3 smaller methods
+[33mb1acd6f[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m Merge pull request #4 from Luz-Moreno-Campos/file-manager
+[33mfcd4769[m[33m ([m[1;31morigin/file-manager[m[33m, [m[1;32mfile-manager[m[33m)[m created SaveSummary method
+[33mb031ead[m created LoadVault method to read, parse lines and create objetcs array
+[33mecba3c9[m created FileManager with fields  and constructor
+[33mb9e78e5[m Merge pull request #3 from Luz-Moreno-Campos/helper-methods
+[33m6a063d8[m[33m ([m[1;31morigin/helper-methods[m[33m, [m[1;32mhelper-methods[m[33m)[m created BinarySearchByDecodedName method
+[33maef8fd5[m created ShiftRight method
+[33m9ca2de9[m created ArrayHelper class and added method for array resizing
+[33ma2fd76f[m Merge pull request #2 from Luz-Moreno-Campos/decoder
+[33m3416d39[m[33m ([m[1;31morigin/decoder[m[33m, [m[1;32mdecoder[m[33m)[m added exception for empty string
+[33mee784c2[m created DecodeName method
+[33m72a4d8c[m added exception to first method for invalid characters
+[33m6b5c2da[m created DecodeLetter method
+[33mdeefc41[m created ReverseMapping method
+[33mc58e5d2[m divided responsibility into methods and created first method
+[33m86ac2c8[m created Decoder class with fields
+[33m7ba63f1[m Merge pull request #1 from Luz-Moreno-Campos/artifact
+[33m6b4f898[m[33m ([m[1;31morigin/artifact[m[33m, [m[1;32martifact[m[33m)[m added constructor, instantiated object for testing exception and fixed exception parameters for correct message output
+[33m4199893[m Created AlienArtifact class and added properties
+[33ma774cbb[m Agregar archivos de proyecto.
+[33mbc102e9[m Agregar .gitattributes y .gitignore.

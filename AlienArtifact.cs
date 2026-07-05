@@ -8,7 +8,7 @@ namespace ADS_03_luz_moreno_campos
         private const int maxDescriptionLength = 200;
 
         public string EncodedName { get; private set; }
-        public string DecodedName { get; private set; }
+        public string DecodedName { get;  set; }
         public string Planet { get; private set; }
 
         //Used string for DiscoveryDate because the dates are not valid, but fictional galactic cycles.

@@ -54,7 +54,7 @@ namespace ADS_03_luz_moreno_campos
         }
 
 
-        private static string DecodeName(string encodedName)
+        public static string DecodeName(string encodedName)
         {
             if (encodedName == null)
             {
