@@ -131,6 +131,11 @@ namespace ADS_03_luz_moreno_campos
             Console.WriteLine();
         }
 
+        public void Save()
+        {
+            FileManager.SaveSummary(Artifacts);
+        }
+
 
 
 
