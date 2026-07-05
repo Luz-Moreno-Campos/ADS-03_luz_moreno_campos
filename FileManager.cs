@@ -119,13 +119,13 @@ namespace ADS_03_luz_moreno_campos
         }
 
 
-        private string[] ReadLinesFromVault()
+        private string[] ReadLinesFromFile(string filePath)
         {
             string[] lines;
 
             try
             {
-                lines = File.ReadAllLines(_vaultPath);
+                lines = File.ReadAllLines(filePath);
             }
             catch (UnauthorizedAccessException)
             {
@@ -194,7 +194,7 @@ namespace ADS_03_luz_moreno_campos
 
         public AlienArtifact[] LoadVault(out int count)
         {
-            string[] lines = ReadLinesFromVault();
+            string[] lines = ReadLinesFromFile(_vaultPath);
             return CreateArtifactsFromLines(lines, out count);
         }
 
@@ -241,6 +241,23 @@ namespace ADS_03_luz_moreno_campos
                 }
             }
         }
+        public AlienArtifact LoadArtifactFile(string artifactPath)
+        {
+            string[] lines = ReadLinesFromFile(artifactPath);
+
+            int count;
+
+            AlienArtifact[] artifacts = CreateArtifactsFromLines(lines, out count);
+
+            if (count != 1)
+            {
+                throw new FormatException("Artifact file must contain exactly one artifact line.");
+            }
+
+            return artifacts[0];
+        }
+
+
 
     }
 }

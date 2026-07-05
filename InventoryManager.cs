@@ -1,5 +1,7 @@
 ﻿
 
+using System.Text;
+
 namespace ADS_03_luz_moreno_campos
 {
     public class InventoryManager
@@ -7,11 +9,14 @@ namespace ADS_03_luz_moreno_campos
         public AlienArtifact[] Artifacts { get; private set; }
         public int Count { get; private set; }
 
-        public InventoryManager(AlienArtifact[] artifacts, int count)
+        public FileManager FileManager { get; private set; }
+
+        public InventoryManager(AlienArtifact[] artifacts, int count, FileManager fileManager)
         {
             Artifacts = artifacts;   
-            Count = count;           
- 
+            Count = count;
+            FileManager = fileManager;
+
         }
 
         private void DecodeAllNames()
@@ -62,6 +67,50 @@ namespace ADS_03_luz_moreno_campos
 
             Count++;
         }
+
+
+        public bool AddArtifact(string artifactPath)
+        {
+            if (artifactPath == null)
+            {
+                throw new ArgumentNullException(
+                    paramName: null,
+                    message: "Artifact file path cannot be null.");
+            }
+
+            if (artifactPath.Trim() == "")
+            {
+                throw new ArgumentException(
+                    message: "Artifact file path cannot be empty.",
+                    paramName: null);
+            }
+
+           
+            AlienArtifact newArtifact = FileManager.LoadArtifactFile(artifactPath);
+
+            if (newArtifact == null)
+            {
+                throw new FormatException("Artifact file cannot be null.");
+            }
+
+           
+            string decodedName = Decoder.DecodeName(newArtifact.EncodedName);
+            newArtifact.DecodedName = decodedName;
+
+            int index = ArrayHelper.BinarySearchByDecodedName(Artifacts, decodedName);
+             ordere ordered
+            if (index >= 0)
+            {
+              
+                return false;
+            }
+
+         
+            OrderedInsertion(newArtifact);
+
+            return true;
+        }
+
 
 
 
