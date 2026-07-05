@@ -98,7 +98,7 @@ namespace ADS_03_luz_moreno_campos
             newArtifact.DecodedName = decodedName;
 
             int index = ArrayHelper.BinarySearchByDecodedName(Artifacts, decodedName);
-             ordere ordered
+
             if (index >= 0)
             {
               
@@ -109,6 +109,26 @@ namespace ADS_03_luz_moreno_campos
             OrderedInsertion(newArtifact);
 
             return true;
+        }
+
+        public void ViewInventory()
+        {
+            Console.WriteLine("Galactic Vault Inventory");
+
+            for (int i = 0; i < Count; i++)
+            {
+                AlienArtifact artifact = Artifacts[i];
+
+                Console.WriteLine();
+                Console.WriteLine("Encoded Name: " + artifact.EncodedName);
+                Console.WriteLine("Decoded Name: " + artifact.DecodedName);
+                Console.WriteLine("Planet: " + artifact.Planet);
+                Console.WriteLine("Discovery Date: " + artifact.DiscoveryDate);
+                Console.WriteLine("Storage Location: " + artifact.StorageLocation);
+                Console.WriteLine("Description: " + artifact.Description);
+            }
+
+            Console.WriteLine();
         }
 
 
