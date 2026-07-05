@@ -24,21 +24,45 @@ namespace ADS_03_luz_moreno_campos
         }
 
         private void SortByDecodedName()
-{
-        for (int i = 1; i < Count; i++)
-    {
-        AlienArtifact current = Artifacts[i];
-        int j = i - 1;
-
-        while (j >= 0 && Artifacts[j].DecodedName.CompareTo(current.DecodedName) > 0)
         {
-            Artifacts[j + 1] = Artifacts[j];
-            j--;
+            for (int i = 1; i < Count; i++)
+            {
+                AlienArtifact current = Artifacts[i];
+                int j = i - 1;
+
+                while (j >= 0 && Artifacts[j].DecodedName.CompareTo(current.DecodedName) > 0)
+                {
+                    Artifacts[j + 1] = Artifacts[j];
+                    j--;
+                }
+
+                Artifacts[j + 1] = current;
+            }
         }
 
-        Artifacts[j + 1] = current;
-    }
-}
+        private void OrderedInsertion(AlienArtifact newArtifact)
+        {
+          
+            Artifacts = ArrayHelper.ResizeArray(Artifacts);
+
+            int insertIndex = Count;
+
+            for (int i = 0; i < Count; i++)
+            {
+                if (newArtifact.DecodedName.CompareTo(Artifacts[i].DecodedName) < 0)
+                {
+                    insertIndex = i;
+                    break;
+                }
+            }
+
+            ArrayHelper.ShiftRight(Artifacts, insertIndex, Count);
+           
+            Artifacts[insertIndex] = newArtifact;
+
+            Count++;
+        }
+
 
 
     }

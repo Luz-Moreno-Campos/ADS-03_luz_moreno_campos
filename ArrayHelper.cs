@@ -26,7 +26,7 @@ namespace ADS_03_luz_moreno_campos
 
 
         //Method  for insertion sort
-        public static void ShiftRight(AlienArtifact[] array, int startIndex)
+        public static void ShiftRight(AlienArtifact[] array, int startIndex, int count)
         {
             if (array == null)
             {
@@ -42,7 +42,7 @@ namespace ADS_03_luz_moreno_campos
                     message: "Start index must be within a valid range for shifting.");
             }
 
-            for (int i = array.Length - 1; i > startIndex; i--)
+            for (int i = count; i > startIndex; i--)
             {
                 array[i] = array[i - 1];
             }
