@@ -156,12 +156,12 @@ namespace ADS_03_luz_moreno_campos
                         $"Invalid line at index {i}: line is empty.");
                 }
 
-                string[] parts = line.Split('|');
+                string[] parts = line.Split(',');
 
                 if (parts.Length != 5)
                 {
                     throw new FormatException(
-                        $"Invalid format at line {i + 1}. Valid format is 5 fields separated by '|'.");
+                        $"Invalid format at line {i + 1}. Valid format is 5 fields separated by ','.");
                 }
 
                 string encodedName = parts[0].Trim();

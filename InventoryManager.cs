@@ -17,6 +17,9 @@ namespace ADS_03_luz_moreno_campos
             Count = count;
             FileManager = fileManager;
 
+            DecodeAllNames();   
+            SortByDecodedName(); 
+
         }
 
         private void DecodeAllNames()
@@ -135,9 +138,6 @@ namespace ADS_03_luz_moreno_campos
         {
             FileManager.SaveSummary(Artifacts);
         }
-
-
-
 
     }
 
