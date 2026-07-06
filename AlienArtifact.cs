@@ -5,10 +5,10 @@ namespace ADS_03_luz_moreno_campos
     public class AlienArtifact
     {
         //Wrote it in camelCase because it is a private const, which I will use to validate description in description setter.
-        private const int maxDescriptionLength = 200;
+        private const int maxDescriptionLength = 500;
 
         public string EncodedName { get; private set; }
-        public string DecodedName { get; private set; }
+        public string DecodedName { get;  set; }
         public string Planet { get; private set; }
 
         //Used string for DiscoveryDate because the dates are not valid, but fictional galactic cycles.

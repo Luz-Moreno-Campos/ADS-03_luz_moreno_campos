@@ -32,7 +32,7 @@ namespace ADS_03_luz_moreno_campos
                     fileName: vaultPath);
             }
 
-         
+
 
             // Path.GetFullPath validates the path and, if it's valid, converts it to an absolute path; otherwise it throws an error.
             // It checks for invalid characters, unsupported path formats, and paths that are too long.
@@ -118,14 +118,14 @@ namespace ADS_03_luz_moreno_campos
             _summaryPath = summaryPath;
         }
 
-                public AlienArtifact[] LoadVault(out int count)
+
+        private string[] ReadLinesFromFile(string filePath)
         {
-            count = 0;
             string[] lines;
 
             try
             {
-                lines = File.ReadAllLines(_vaultPath);
+                lines = File.ReadAllLines(filePath);
             }
             catch (UnauthorizedAccessException)
             {
@@ -138,8 +138,13 @@ namespace ADS_03_luz_moreno_campos
                     "An I/O error occurred while reading the vault file.");
             }
 
-            AlienArtifact[] artifacts = new AlienArtifact[lines.Length];
+            return lines;
+        }
 
+        private AlienArtifact[] CreateArtifactsFromLines(string[] lines, out int count)
+        {
+            AlienArtifact[] artifacts = new AlienArtifact[lines.Length];
+            count = 0;
 
             for (int i = 0; i < lines.Length; i++)
             {
@@ -151,12 +156,12 @@ namespace ADS_03_luz_moreno_campos
                         $"Invalid line at index {i}: line is empty.");
                 }
 
-                string[] parts = line.Split('|');
+                string[] parts = line.Split(',');
 
                 if (parts.Length != 5)
                 {
                     throw new FormatException(
-                        $"Invalid format at line {i + 1}. Valid format is 5 fields separated by '|'.");
+                        $"Invalid format at line {i + 1}. Valid format is 5 fields separated by ','.");
                 }
 
                 string encodedName = parts[0].Trim();
@@ -164,6 +169,7 @@ namespace ADS_03_luz_moreno_campos
                 string discoveryDate = parts[2].Trim();
                 string storageLocation = parts[3].Trim();
                 string description = parts[4].Trim();
+
                 try
                 {
                     AlienArtifact artifact = new AlienArtifact(
@@ -184,8 +190,14 @@ namespace ADS_03_luz_moreno_campos
             }
 
             return artifacts;
-
         }
+
+        public AlienArtifact[] LoadVault(out int count)
+        {
+            string[] lines = ReadLinesFromFile(_vaultPath);
+            return CreateArtifactsFromLines(lines, out count);
+        }
+
 
         public void SaveSummary(AlienArtifact[] artifacts)
         {
@@ -229,6 +241,23 @@ namespace ADS_03_luz_moreno_campos
                 }
             }
         }
+        public AlienArtifact LoadArtifactFile(string artifactPath)
+        {
+            string[] lines = ReadLinesFromFile(artifactPath);
+
+            int count;
+
+            AlienArtifact[] artifacts = CreateArtifactsFromLines(lines, out count);
+
+            if (count != 1)
+            {
+                throw new FormatException("Artifact file must contain exactly one artifact line.");
+            }
+
+            return artifacts[0];
+        }
+
+
 
     }
 }
