@@ -199,7 +199,7 @@ namespace ADS_03_luz_moreno_campos
         }
 
 
-        public void SaveSummary(AlienArtifact[] artifacts)
+        public void SaveSummary(AlienArtifact[] artifacts, int count)
         {
             StreamWriter writer = null;
 
@@ -207,7 +207,7 @@ namespace ADS_03_luz_moreno_campos
             {
                 writer = new StreamWriter(_summaryPath);
 
-                for (int i = 0; i < artifacts.Length; i++)
+                for (int i = 0; i < count; i++)
                 {
                     AlienArtifact artifact = artifacts[i];
 
