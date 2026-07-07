@@ -51,92 +51,92 @@
                 switch (option)
                 {
                     case "1":
+                    {
+                        bool completed = false;
+                        bool keepTrying = true;
+
+                        string artifactFile = null;   
+
+                        while (keepTrying)
                         {
-                            bool completed = false;
-                            bool keepTrying = true;
-
-                            string artifactFile = null;   
-
-                            while (keepTrying)
+                                
+                            if (artifactFile == null)
                             {
-                                
-                                if (artifactFile == null)
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine();
-                                    Console.WriteLine("Enter artifact file name with extension (e.g. artifact_omega.txt) or press 0 to return to the menu");
-                                    Console.WriteLine();
-                                    Console.Write("Enter file name: ");
+                                Console.Clear();
+                                Console.WriteLine();
+                                Console.WriteLine("Enter artifact file name with extension (e.g. artifact_omega.txt) or press 0 to return to the menu");
+                                Console.WriteLine();
+                                Console.Write("Enter file name: ");
 
-                                    artifactFile = Console.ReadLine();
-                                }
+                                artifactFile = Console.ReadLine();
+                            }
 
                                 
-                                if (artifactFile == "0")
-                                {
-                                    keepTrying = false;
-                                    break;
-                                }
+                            if (artifactFile == "0")
+                            {
+                                keepTrying = false;
+                                break;
+                            }
 
-                                try
-                                {
+                            try
+                            {
                                     
-                                    if (string.IsNullOrWhiteSpace(artifactFile))
-                                    {
-                                        Console.WriteLine();
-                                        Console.WriteLine("Artifact file name cannot be empty.");
-                                        Console.Write("Enter a new file name or press 0 to return to the menu:");
-
-                                        artifactFile = Console.ReadLine();   
-                                        continue;                            
-                                    }
-
-                                    if (!artifactFile.EndsWith(".txt"))
-                                    {
-                                        Console.WriteLine();
-                                        Console.WriteLine("Artifact file must be a .txt file.");
-                                        Console.Write("Enter a new file name or press 0 to return to the menu:");
-
-                                        artifactFile = Console.ReadLine();   
-                                        continue;
-                                    }
-
-                                    bool added = inventory.AddArtifact(artifactFile);
-
-                                    if (added)
-                                    {
-                                        Console.WriteLine();
-                                        Console.WriteLine("Artifact added successfully.");
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine();
-                                        Console.WriteLine("Artifact already exists in the Galactic Vault.");
-                                    }
-
-                                    completed = true;
-                                    keepTrying = false;
-                                }
-                                catch (Exception ex)
+                                if (string.IsNullOrWhiteSpace(artifactFile))
                                 {
                                     Console.WriteLine();
-                                    Console.WriteLine("Error: " + ex.Message);
+                                    Console.WriteLine("Artifact file name cannot be empty.");
+                                    Console.Write("Enter a new file name or press 0 to return to the menu:");
+
+                                    artifactFile = Console.ReadLine();   
+                                    continue;                            
+                                }
+
+                                if (!artifactFile.EndsWith(".txt"))
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Artifact file must be a .txt file.");
                                     Console.Write("Enter a new file name or press 0 to return to the menu:");
 
                                     artifactFile = Console.ReadLine();   
                                     continue;
                                 }
-                            }
 
-                            if (completed)
+                                bool added = inventory.AddArtifact(artifactFile);
+
+                                if (added)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Artifact added successfully.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Artifact already exists in the Galactic Vault.");
+                                }
+
+                                completed = true;
+                                keepTrying = false;
+                            }
+                            catch (Exception ex)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Press any key to go back to the menu");
-                                Console.ReadKey();
-                            }
+                                Console.WriteLine("Error: " + ex.Message);
+                                Console.Write("Enter a new file name or press 0 to return to the menu:");
 
-                            break;
+                                artifactFile = Console.ReadLine();   
+                                continue;
+                            }
                         }
+
+                        if (completed)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Press any key to go back to the menu");
+                            Console.ReadKey();
+                        }
+
+                        break;
+                    }
 
                     case "2":
 
@@ -162,7 +162,7 @@
                             Console.Clear();
                             inventory.Save();
                             Console.WriteLine();
-                            Console.WriteLine("Summary saved. Expedition.");
+                            Console.WriteLine("Summary saved. Exiting alien artifact inventory.");
                             exit = true;
                         }
                         catch (Exception ex)
@@ -177,11 +177,15 @@
                         Console.WriteLine();
                         Console.WriteLine("You entered an invalid option. Press any key  to go back to the menu");
                         Console.ReadKey();
+                 
                         break;
+
                 }
+
             }
 
         }
+
     }
         
 }
