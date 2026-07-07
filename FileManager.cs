@@ -185,8 +185,9 @@ namespace ADS_03_luz_moreno_campos
                 }
                 catch (ArgumentOutOfRangeException ex)
                 {
-                    Console.WriteLine($"Error at line {i + 1}: {ex.Message}");
+                    throw new FormatException($"Invalid data at line {i + 1}: {ex.Message}");
                 }
+
             }
 
             return artifacts;
@@ -199,7 +200,7 @@ namespace ADS_03_luz_moreno_campos
         }
 
 
-        public void SaveSummary(AlienArtifact[] artifacts)
+        public void SaveSummary(AlienArtifact[] artifacts, int count)
         {
             StreamWriter writer = null;
 
@@ -207,7 +208,7 @@ namespace ADS_03_luz_moreno_campos
             {
                 writer = new StreamWriter(_summaryPath);
 
-                for (int i = 0; i < artifacts.Length; i++)
+                for (int i = 0; i < count; i++)
                 {
                     AlienArtifact artifact = artifacts[i];
 
@@ -240,24 +241,55 @@ namespace ADS_03_luz_moreno_campos
                     writer.Close();
                 }
             }
+
         }
-        public AlienArtifact LoadArtifactFile(string artifactPath)
+
+        public AlienArtifact LoadArtifactFile(string fileName)
         {
-            string[] lines = ReadLinesFromFile(artifactPath);
-
-            int count;
-
-            AlienArtifact[] artifacts = CreateArtifactsFromLines(lines, out count);
-
-            if (count != 1)
+            if (string.IsNullOrWhiteSpace(fileName))
             {
-                throw new FormatException("Artifact file must contain exactly one artifact line.");
+                throw new ArgumentException("Artifact file name cannot be empty.");
             }
 
-            return artifacts[0];
+            if (!fileName.EndsWith(".txt"))
+            {
+                throw new ArgumentException("Artifact file must be a .txt file.");
+            }
+
+            if (!File.Exists(fileName))
+            {
+                throw new FileNotFoundException("The artifact file does not exist.");
+            }
+
+            try
+            {
+                string[] lines = ReadLinesFromFile(fileName);
+
+                if (lines == null || lines.Length == 0)
+                {
+                    throw new FormatException("Artifact file is empty.");
+                }
+
+                int count;
+
+                AlienArtifact[] artifacts = CreateArtifactsFromLines(lines, out count);
+
+                if (count != 1)
+                {
+                    throw new FormatException("Artifact file must contain exactly one artifact line.");
+                }
+
+                return artifacts[0];
+            }
+            catch (UnauthorizedAccessException)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to access the artifact file.");
+            }
+            catch (IOException)
+            {
+                throw new IOException("An IO error occurred while reading the artifact file.");
+            }
         }
-
-
 
     }
 }

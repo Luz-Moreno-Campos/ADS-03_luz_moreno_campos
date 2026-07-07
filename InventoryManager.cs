@@ -74,29 +74,25 @@ namespace ADS_03_luz_moreno_campos
 
         public bool AddArtifact(string artifactPath)
         {
+            artifactPath = artifactPath.Trim();
+
             if (artifactPath == null)
             {
                 throw new ArgumentNullException(
                     paramName: null,
-                    message: "Artifact file path cannot be null.");
+                    message: "Artifact file name cannot be null.");
             }
 
             if (artifactPath.Trim() == "")
             {
                 throw new ArgumentException(
-                    message: "Artifact file path cannot be empty.",
+                    message: "Artifact file name cannot be empty.",
                     paramName: null);
             }
 
            
             AlienArtifact newArtifact = FileManager.LoadArtifactFile(artifactPath);
 
-            if (newArtifact == null)
-            {
-                throw new FormatException("Artifact file cannot be null.");
-            }
-
-           
             string decodedName = Decoder.DecodeName(newArtifact.EncodedName);
             newArtifact.DecodedName = decodedName;
 
@@ -136,7 +132,7 @@ namespace ADS_03_luz_moreno_campos
 
         public void Save()
         {
-            FileManager.SaveSummary(Artifacts);
+            FileManager.SaveSummary(Artifacts, Count);
         }
 
     }
